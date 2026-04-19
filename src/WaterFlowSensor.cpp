@@ -1,12 +1,18 @@
 #include "Arduino.h"
 #include "WaterFlowSensor.h"
 
+#ifdef ESP8266
+#define WF_IRAM_ATTR IRAM_ATTR
+#else
+#define WF_IRAM_ATTR
+#endif
+
 #define WF_CRITICAL_ENTER()   noInterrupts()
 #define WF_CRITICAL_EXIT()    interrupts()
 
 static WaterFlowSensor* _instance = nullptr;
 
-static void IRAM_ATTR _pulseHandler() {
+static void WF_IRAM_ATTR _pulseHandler() {
   if (_instance) {
     _instance->pulseCount();
   }
@@ -49,9 +55,9 @@ void WaterFlowSensor::begin() {
   digitalWrite(_pin, INPUT_PULLUP);
   int mode = LOW;
   switch (_edgeMode) {
-    case FALLING_EDGE: mode = FALLING; break;
-    case RISING_EDGE:  mode = RISING;  break;
-    case CHANGE_EDGE:  mode = CHANGE;  break;
+    case WF_FALLING: mode = FALLING; break;
+    case WF_RISING:  mode = RISING;  break;
+    case WF_CHANGE:  mode = CHANGE;  break;
   }
   attachInterrupt(digitalPinToInterrupt(_pin), _pulseHandler, mode);
 }
