@@ -1,17 +1,22 @@
 {
-    "name": "WaterFlow",
-    "version": "1.2.0",
-    "keywords": "sensor, arduino",
-    "description": "Water Flow Rate, Water Volume.",
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/Tobiyouth/WaterFlow.git"
-    },
-    "authors": [{
-      "name": "Tobiyouth",
-      "email": "ljtian516521@qq.com",
+  "name": "WaterFlowSensor",
+  "version": "2.0.1",
+  "keywords": "water, flow, sensor, arduino, YF-B6, Hall-effect, calibration",
+  "description": "Library for measuring water flow rate and volume using YF-B6 and compatible sensors.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brocci/WaterFlowSensor.git"
+  },
+  "authors": [
+    {
+      "name": "brocci",
       "maintainer": true
-    }],
-    "frameworks": ["arduino"],
-    "platforms": ["*"]
-  }
+    },
+    {
+      "name": "Tobiyouth",
+      "maintainer": false
+    }
+  ],
+  "frameworks": ["arduino"],
+  "platforms": ["*"]
+}

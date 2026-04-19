@@ -1,24 +1,29 @@
 ###########################################
-# Syntax Coloring Map For WaterFlow
+# Syntax Coloring Map For WaterFlowSensor
 ###########################################
 
 ###########################################
 # Datatypes (KEYWORD1)
 ###########################################
 
-WaterFlow	KEYWORD1
+WaterFlowSensor	KEYWORD1
+EdgeMode	KEYWORD1
 
 ###########################################
 # Methods and Functions (KEYWORD2)
 ###########################################
 
 begin	KEYWORD2
-read	KEYWORD2
 pulseCount	KEYWORD2
-getPulse    KEYWORD2
-getFlowRateOfSecond	KEYWORD2
-getFlowRateOfMinute	KEYWORD2
-getVolume   KEYWORD2
 isFlowing	KEYWORD2
-clearVolume   KEYWORD2
-setListeners	KEYWORD2
+getFlowRate	KEYWORD2
+getVolume	KEYWORD2
+clearVolume	KEYWORD2
+calibrate	KEYWORD2
+resetCalibration	KEYWORD2
+getPulsesPerLiter	KEYWORD2
+setStorageCallbacks	KEYWORD2
+saveCalibration	KEYWORD2
+loadCalibration	KEYWORD2
+onFlowStart	KEYWORD2
+onFlowStop	KEYWORD2
