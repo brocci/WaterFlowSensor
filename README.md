@@ -31,7 +31,7 @@ WaterFlowSensor sensor(2);
 
 void setup() {
   sensor.begin();
-  Serial.begin(9600);
+  Serial.begin(115200);
 }
 
 void loop() {
@@ -51,7 +51,7 @@ void loop() {
 ## Constructor
 
 ```cpp
-WaterFlowSensor(uint8_t pin, uint16_t pulsesPerLiter = 396, uint16_t debounceMicroseconds = 0, EdgeMode edgeMode = EdgeMode::FALLING_EDGE);
+WaterFlowSensor(uint8_t pin, uint16_t pulsesPerLiter = 396, uint16_t debounceMicroseconds = 0, EdgeMode edgeMode = WF_FALLING);
 ```
 
 | Parameter | Default | Description |
@@ -59,17 +59,17 @@ WaterFlowSensor(uint8_t pin, uint16_t pulsesPerLiter = 396, uint16_t debounceMic
 | pin | - | Digital pin (must support interrupts) |
 | pulsesPerLiter | 396 | Sensor pulses per liter |
 | debounceMicroseconds | 0 | Debounce filter (0 = disabled) |
-| edgeMode | FALLING_EDGE | Interrupt edge mode |
+| edgeMode | WF_FALLING | Interrupt edge mode |
 
 ### Edge Mode Options
 
 ```cpp
-EdgeMode::FALLING_EDGE   // Trigger on falling edge (default, recommended for YF-B6)
-EdgeMode::RISING_EDGE   // Trigger on rising edge
-EdgeMode::CHANGE_EDGE   // Trigger on any edge change
+WF_FALLING  // Trigger on falling edge (default, recommended for YF-B6)
+WF_RISING   // Trigger on rising edge
+WF_CHANGE   // Trigger on any edge change
 
 // Example with RISING edge
-WaterFlowSensor sensor(2, 450, 0, EdgeMode::RISING_EDGE);
+WaterFlowSensor sensor(2, 450, 0, WF_RISING);
 ```
 
 ## API Reference
@@ -114,16 +114,6 @@ The sensor adjusts its pulses-per-liter to match reality.
 sensor.calibrate(1050, 1000);
 
 // Now readings will be ~5% lower
-
-### Storage (Optional)
-
-```cpp
-// Set callbacks for custom storage (EEPROM, Flash, SD, etc.)
-void setStorageCallbacks(readFn, writeFn);
-
-// Save/load calibration
-bool saveCalibration(int address = 0);
-bool loadCalibration(int address = 0);
 ```
 
 ### Events (Optional)
@@ -193,7 +183,8 @@ void setup() {
   if (httpCode == 200) {
     String payload = http.getString();
     int pulsesPerLiter = payload.toInt();
-    sensor.setPulsesPerLiter(pulsesPerLiter);
+    // Use constructor to set custom pulsesPerLiter before begin()
+    // WaterFlowSensor sensor(2, pulsesPerLiter);
   }
   
   // Now begin with remote config
